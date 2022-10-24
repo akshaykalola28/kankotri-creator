@@ -2,6 +2,7 @@ package com.example.nameadderinpdf
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,7 @@ import com.tom_roush.pdfbox.pdmodel.PDPageContentStream
 import com.tom_roush.pdfbox.pdmodel.font.PDType0Font
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -27,10 +29,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViews() {
         with(binding) {
-            btnCreateCard.setOnClickListener {
+            /*btnCreateCard.setOnClickListener {
                 val name = etName.text.toString()
                 addName(name, Type.Card)
-            }
+            }*/
 
             btnCreateKankotri.setOnClickListener {
                 val name = etName.text.toString()
@@ -71,14 +73,18 @@ class MainActivity : AppCompatActivity() {
                     saveFile.parentFile?.mkdirs()
                     saveFile.createNewFile()
                     document.save(saveFile)
-                    loadPdf(saveFile)
+                    loadPdf(saveFile, type.pageIndex)
+                    withContext(Dispatchers.Main){
+                        binding.btnShare.visibility = View.VISIBLE
+                    }
                 }
             }
         }
     }
 
-    private fun loadPdf(file: File) {
+    private fun loadPdf(file: File, defaultPage: Int) {
         binding.pdfView.fromFile(file)
+            .defaultPage(defaultPage)
             .load()
     }
 
@@ -93,13 +99,10 @@ class MainActivity : AppCompatActivity() {
                 file
             )
         )
-        startActivityForResult(
-            Intent.createChooser(share, "Choose Option"),
-            12
-        )
+        startActivity(Intent.createChooser(share, "Choose Option"))
     }
 
     companion object {
-        const val FILE_NAME = "Jasmita & Snehal Kalola.pdf"
+        const val FILE_NAME = "Ladola Family (Lathi).pdf"
     }
 }
