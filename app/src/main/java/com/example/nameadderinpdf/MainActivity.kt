@@ -73,8 +73,8 @@ class MainActivity : AppCompatActivity() {
                     saveFile.parentFile?.mkdirs()
                     saveFile.createNewFile()
                     document.save(saveFile)
-                    loadPdf(saveFile, type.pageIndex)
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
+                        loadPdf(saveFile, type.pageIndex)
                         binding.btnShare.visibility = View.VISIBLE
                     }
                 }
@@ -103,6 +103,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val FILE_NAME = "Ladola Family (Lathi).pdf"
+        const val FILE_NAME = "Mayur Kalola.pdf"
     }
 }
