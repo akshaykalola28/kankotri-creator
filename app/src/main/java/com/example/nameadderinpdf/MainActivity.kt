@@ -52,9 +52,17 @@ class MainActivity : AppCompatActivity() {
             assets.open(type.fileName).use {
                 val document = PDDocument.load(it)
                 val page = document.getPage(type.pageIndex)
+                val page2 = document.getPage(1)
                 val contentStream = PDPageContentStream(
                     document,
                     page,
+                    PDPageContentStream.AppendMode.APPEND,
+                    false,
+                    true
+                )
+                val contentStream2 = PDPageContentStream(
+                    document,
+                    page2,
                     PDPageContentStream.AppendMode.APPEND,
                     false,
                     true
@@ -68,6 +76,13 @@ class MainActivity : AppCompatActivity() {
                     contentStream.showText(name)
                     contentStream.endText()
                     contentStream.close()
+                    contentStream2.beginText()
+                    contentStream2.newLineAtOffset(350f, 300f)
+                    contentStream2.setNonStrokingColor(type.color.r, type.color.g, type.color.b)
+                    contentStream2.setFont(pdFont, type.fontSize)
+                    contentStream2.showText(name)
+                    contentStream2.endText()
+                    contentStream2.close()
 
                     val saveFile = File(filesDir.absolutePath + File.separator + FILE_NAME)
                     saveFile.parentFile?.mkdirs()
