@@ -8,8 +8,8 @@ sealed class Type(
     val fontSize: Float,
     val color: RGB
 ) {
-//    object Card : Type("card.pdf", 230f, 1050f, 0, 38f, RGB(204, 14, 0))
-    object Kankotri : Type("kankotri.pdf", 147f, 490f, 2, 14f, RGB(230, 11, 32))
+    //    object Card : Type("card.pdf", 230f, 1050f, 0, 38f, RGB(204, 14, 0))
+    object Kankotri : Type("kankotri.pdf", 160f, 610f, 1, 14f, RGB(255, 0, 0))
 }
 
 data class RGB(
