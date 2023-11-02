@@ -9,7 +9,7 @@ sealed class Type(
     val color: RGB
 ) {
     //    object Card : Type("card.pdf", 230f, 1050f, 0, 38f, RGB(204, 14, 0))
-    object Kankotri : Type("invitation.pdf", 110f, 455f, 0, 17f, RGB(255,255,255))
+    object Kankotri : Type("vastu.pdf", 140f, 604f, 0, 16f, RGB(222, 203, 100))
 }
 
 data class RGB(
